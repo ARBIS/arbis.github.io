@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<title>Web Speech API Test</title>
+<h1>This is a Web Speech API Test</h1>
+<h2> <a href="https://877bc70cfb789569a7d42065a0bc21421e336de0.googledrive.com/host/0B8jusDclXuZgbmJiV1ZwWUNHOGc/Speech%20API%20Continue.html" target="_blank">Another One</a></h2>
+<hr>
+<p>Talk slowly and clearly for the best performance </p>
+<p>Say one of the following commands and it will display below:</p>
+
+<p>What is the answer to life the universe and everything</p>
+<p>Who is the best? </p> 
+<p>What is your name?</p>
+<p>Hello/Hi</p>
+<hr>
+<h3 id="p1">I am the result</h3>
+<hr>
+
+
+    <script> 
+
+    if (!('webkitSpeechRecognition' in window)) {
+        alert('Web speech API is not supported in this browser');
+      } 
+    else {
+
+        // Speech recognizer init
+        var recognizer = new webkitSpeechRecognition();
+
+        // continously listen to speech
+        recognizer.continuous = true;
+
+        // set languages supported
+        recognizer.lang = ['English', ['en-US', 'United States']];
+
+        // We return non-final strings so gameplay isn't laggy
+        recognizer.interimResults = true;
+
+        recognizer.onresult = function(e) {
+
+        // set variable 
+        var interim_transcript = '';
+          if (e.results.length) {
+             for (var i = event.resultIndex; i < event.results.length; i++) {
+                 interim_transcript = event.results[i][0].transcript; 
+
+                 // if the object isn't moving, allow commands to be sent down.
+                 scriptLoop(interim_transcript,'voice');
+              }
+            
+           
+          }
+        };
+      // start speech to text translation
+      recognizer.start();
+
+   } 
+function speakIt() {
+var msg = new SpeechSynthesisUtterance(document.getElementById("p1").innerHTML);
+window.speechSynthesis.speak(msg);
+}
+    
+    function scriptLoop(dir,parent){
+
+    // don't let a setTimeout lapse over to next game
+    if(parent!='voice'){return}
+  
+            switch(dir){
+              // voice sometimes adds space before words, so check for both strings
+              case ' what is the answer to life the universe and everything':
+              case 'what is the answer to life the universe and everything':
+                    // do the stuff you want here
+                   document.getElementById("p1").innerHTML = "42";
+                    break;
+
+               case ' who is the best':
+               case 'who is the best':
+                   document.getElementById("p1").innerHTML = "My creator is the best.";
+                    break;
+
+               case ' what is your name':
+               case 'what is your name':
+                     document.getElementById("p1").innerHTML = "I don't have a name yet :(";
+                    break;
+ 
+               case ' hello':
+               case 'hello':
+	       case ' hi':
+	       case 'hi':  
+                     document.getElementById("p1").innerHTML = "Hello There!"; 
+var msg = new SpeechSynthesisUtterance(document.getElementById("p1").innerHTML);
+//window.speechSynthesis.speak(msg);
+                    break;
+
+               case ' stop': 
+               case 'stop':
+                    move = false;
+                    break;
+                default:
+                    move = false;
+                   //console.log(dir);
+            }
+
+       
+    } 
+
+
+    </script>
+  </head>
+  <body>
+<button onclick="speakIt()">Speak</button>
+    <canvas id='cvs'></canvas>
+  </body>
+</html> 
