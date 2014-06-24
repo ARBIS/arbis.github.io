@@ -6,6 +6,20 @@
 <!--This is some stuff added by me, Jonah. Nothing to be alarmed about. :) -->
   <!-- Include jQuery -->
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+
+     <div id="header"> <!-- This is some cool navigation bar stuff -->
+        <div id="logo">ARBIS<br /> Chrome API Test</div>
+        <div id="navWrap">
+            <div id="nav">
+                <ul>
+                    <li><a href="//aiau.us.to" class="smoothScroll">AIAU Home/a></li>
+                    <li><a href="//blog.aiau.us.to" class="smoothScroll">AIAU Blog</a></li>
+                    <li><a href="https://github.com/ARBIS" class="smoothScroll">ARBIS on GitHub</a></li>
+                </ul>    
+                <br class="clearLeft" />
+            </div>
+        </div>
+    </div> <!-- End cool navigation bar stuff -->
   
 <style type='text/css'>
 
@@ -205,20 +219,6 @@ var msg = new SpeechSynthesisUtterance(document.getElementById("p1").innerHTML);
   </head>
   <body>
   
-     <div id="header"> <!-- This is some cool navigation bar stuff -->
-        <div id="logo">ARBIS<br /> Chrome API Test</div>
-        <div id="navWrap">
-            <div id="nav">
-                <ul>
-                    <li><a href="//aiau.us.to" class="smoothScroll">AIAU Home/a></li>
-                    <li><a href="//blog.aiau.us.to" class="smoothScroll">AIAU Blog</a></li>
-                    <li><a href="https://github.com/ARBIS" class="smoothScroll">ARBIS on GitHub</a></li>
-                </ul>    
-                <br class="clearLeft" />
-            </div>
-        </div>
-    </div> <!-- End cool navigation bar stuff -->
-    
     
 <button onclick="speakIt()">Speak</button>
     <canvas id='cvs'></canvas>
