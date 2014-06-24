@@ -2,6 +2,102 @@
 <html lang="en">
   <head>
 <title>Web Speech API Test</title>
+
+<!--This is some stuff added by me, Jonah. Nothing to be alarmed about. :) -->
+  <!-- Include jQuery -->
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+  
+  <style type='text/css'>
+
+    body {
+   background-color: #333;  
+   color: #999;
+   font: 12px/1.4em Arial,sans-serif;
+}
+#wrap {
+   margin: 10px auto;        
+   background: #666;
+   padding: 10px;
+   width: 700px;
+}
+#header {
+   background-color: #666;
+   color: #FFF;
+}
+#logo {
+   font-size: 30px;  
+   line-height: 40px;    
+   padding: 5px;
+}
+#navWrap {
+   height: 30px;
+}
+#nav {
+   padding: 5px;
+   background: #999;    
+}
+#nav ul {
+   margin: 0;
+   padding: 0;    
+}
+#nav li {
+   float: left;
+   padding: 3px 8px;
+   background-color: #FFF;
+   margin: 0 10px 0 0;
+   color: #F00;
+   list-style-type: none;
+}
+#nav li a {
+   color: #F00;  
+   text-decoration: none;    
+}
+#nav li a:hover {
+   text-decoration: underline;   
+}
+br.clearLeft {
+   clear: left;        
+}​
+
+  </style>
+      
+   
+    <script type='text/javascript'>
+//<![CDATA[ 
+
+$(function() {
+    // Stick the #nav to the top of the window
+    var nav = $('#nav');
+    var navHomeY = nav.offset().top;
+    var isFixed = false;
+    var $w = $(window);
+    $w.scroll(function() {
+        var scrollTop = $w.scrollTop();
+        var shouldBeFixed = scrollTop > navHomeY;
+        if (shouldBeFixed && !isFixed) {
+            nav.css({
+                position: 'fixed',
+                top: 0,
+                left: nav.offset().left,
+                width: nav.width()
+            });
+            isFixed = true;
+        }
+        else if (!shouldBeFixed && isFixed)
+        {
+            nav.css({
+                position: 'static'
+            });
+            isFixed = false;
+        }
+    });
+});
+
+//]]>  
+</script>
+  
+<!--End of cool fancy navigation bar stuff added by me, Jonah. :) -->
+  
 <h1>This is a Web Speech API Test</h1>
 <h2> <a href="https://877bc70cfb789569a7d42065a0bc21421e336de0.googledrive.com/host/0B8jusDclXuZgbmJiV1ZwWUNHOGc/Speech%20API%20Continue.html" target="_blank">Another One</a></h2>
 <hr>
@@ -108,7 +204,24 @@ var msg = new SpeechSynthesisUtterance(document.getElementById("p1").innerHTML);
     </script>
   </head>
   <body>
+  
+     <div id="header"> <!-- This is some cool navigation bar stuff -->
+        <div id="logo">ARBIS<br /> Chrome API Test</div>
+        <div id="navWrap">
+            <div id="nav">
+                <ul>
+                    <li><a href="//aiau.us.to" class="smoothScroll">AIAU Home/a></li>
+                    <li><a href="//blog.aiau.us.to" class="smoothScroll">AIAU Blog</a></li>
+                    <li><a href="https://github.com/ARBIS" class="smoothScroll">ARBIS on GitHub</a></li>
+                </ul>    
+                <br class="clearLeft" />
+            </div>
+        </div>
+    </div> <!-- End cool navigation bar stuff -->
+    
+    
 <button onclick="speakIt()">Speak</button>
     <canvas id='cvs'></canvas>
+    
   </body>
 </html> 
