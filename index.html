@@ -12,8 +12,8 @@
         <div id="navWrap">
             <div id="nav">
                 <ul>
-                    <li><a href="http://aiau.us.to" class="smoothScroll">AIAU Home</a></li>
-                    <li><a href="http://blog.aiau.us.to" class="smoothScroll">AIAU Blog</a></li>
+                    <li><a href="//aiau.us.to" class="smoothScroll">AIAU Home</a></li>
+                    <li><a href="//blog.aiau.us.to" class="smoothScroll">AIAU Blog</a></li>
                     <li><a href="https://github.com/ARBIS" class="smoothScroll">ARBIS on GitHub</a></li>
                 </ul>    
                 <br class="clearLeft" />
@@ -71,7 +71,7 @@
 }
 br.clearLeft {
    clear: left;        
-}​
+}?
 
   </style>
       
@@ -109,15 +109,15 @@ $(function() {
 
 //]]>  
 </script>
-  
-<!--End of cool fancy navigation bar stuff added by me, Jonah. :) -->
-  
+ 
+<title>Web Speech API Test</title>
 <h1>This is a Web Speech API Test</h1>
 <h2> <a href="https://877bc70cfb789569a7d42065a0bc21421e336de0.googledrive.com/host/0B8jusDclXuZgbmJiV1ZwWUNHOGc/Speech%20API%20Continue.html" target="_blank">Another One</a></h2>
 <hr>
+<button onclick="modeSwitch()">Mode</button>  
 <p>Talk slowly and clearly for the best performance </p>
 <p>Say one of the following commands and it will display below:</p>
-
+<p id="demo">1</p> 
 <p>What is the answer to life the universe and everything</p>
 <p>Who is the best? </p> 
 <p>What is your name?</p>
@@ -128,11 +128,12 @@ $(function() {
 
 
     <script> 
-
+    
     if (!('webkitSpeechRecognition' in window)) {
         alert('Web speech API is not supported in this browser');
       } 
     else {
+     
 
         // Speech recognizer init
         var recognizer = new webkitSpeechRecognition();
@@ -146,30 +147,56 @@ $(function() {
         // We return non-final strings so gameplay isn't laggy
         recognizer.interimResults = true;
 
-        recognizer.onresult = function(e) {
+        recognizer.onresult = function(event) {
 
-        // set variable 
+
+        // set variable  
+
+//document.getElementById("demo").innerHTML = mode;  
         var interim_transcript = '';
-          if (e.results.length) {
+          if (event.results.length) {
+
+
              for (var i = event.resultIndex; i < event.results.length; i++) {
                  interim_transcript = event.results[i][0].transcript; 
 
-                 // if the object isn't moving, allow commands to be sent down.
+                 
+                 if (mode == 1) { 
                  scriptLoop(interim_transcript,'voice');
+                } else if (mode == 0) {  
+                document.getElementById("p1").innerHTML = interim_transcript; 
+                 } 
+}
               }
-            
-           
-          }
+
+
+
+
         };
       // start speech to text translation
       recognizer.start();
-
+ 
    } 
+
+
+
 function speakIt() {
 var msg = new SpeechSynthesisUtterance(document.getElementById("p1").innerHTML);
 window.speechSynthesis.speak(msg);
 }
-    
+
+function modeSwitch() {
+//var mode = !mode;
+if (mode == 1) {
+mode = 0;
+} else if (mode == 0) {
+mode = 1;
+}
+document.getElementById("demo").innerHTML = mode;     
+
+}
+ 
+
     function scriptLoop(dir,parent){
 
     // don't let a setTimeout lapse over to next game
@@ -217,11 +244,10 @@ var msg = new SpeechSynthesisUtterance(document.getElementById("p1").innerHTML);
 
     </script>
   </head>
-  <body>
-  
-    
-<button onclick="speakIt()">Speak</button>
+  <body> 
+<button onclick="speakIt()">Speak</button> 
+
+
     <canvas id='cvs'></canvas>
-    
   </body>
 </html> 
