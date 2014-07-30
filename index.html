@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
 <title>Web Speech API Test</title>
-
 <!--This is some stuff added by me, Jonah. Nothing to be alarmed about. :) -->
   <!-- Include jQuery -->
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
@@ -111,7 +110,7 @@ $(function() {
 </script>
  
 <title>Web Speech API Test</title>
-<h1>This is a Web Speech API Test</h1>
+<h1 id ="iron">This is a Web Speech API Test</h1>
 <h2> <a href="https://877bc70cfb789569a7d42065a0bc21421e336de0.googledrive.com/host/0B8jusDclXuZgbmJiV1ZwWUNHOGc/Speech%20API%20Continue.html" target="_blank">Another One</a></h2>
 <hr>
 <button onclick="modeSwitch()">Mode</button>  
@@ -127,8 +126,7 @@ $(function() {
 <hr>
 
 
-    <script> 
-    
+    <script>  
     if (!('webkitSpeechRecognition' in window)) {
         alert('Web speech API is not supported in this browser');
       } 
@@ -186,11 +184,11 @@ window.speechSynthesis.speak(msg);
 }
 
 function modeSwitch() {
-//var mode = !mode;
 if (mode == 1) {
 mode = 0;
 } else if (mode == 0) {
 mode = 1;
+interim_transcript = ' ';
 }
 document.getElementById("demo").innerHTML = mode;     
 
@@ -209,6 +207,14 @@ document.getElementById("demo").innerHTML = mode;
                     // do the stuff you want here
                    document.getElementById("p1").innerHTML = "42";
                     break;
+               case ' Google':
+               case 'Google':
+//recognizer.stop();
+//recognizer.start(); 
+                     interim_transcript = ''; 
+                     document.getElementById("p1").innerHTML = interim_transcript; 
+                     modeSwitch(); 
+                    break; 
 
                case ' who is the best':
                case 'who is the best':
@@ -219,14 +225,20 @@ document.getElementById("demo").innerHTML = mode;
                case 'what is your name':
                      document.getElementById("p1").innerHTML = "I don't have a name yet :(";
                     break;
+
+               case ' I am Iron Man':
+               case 'I am Iron Man':
+                     document.getElementById("p1").innerHTML = "If you are Iron Man, then that makes me J.A.R.V.I.S... I guess I'm moving up in the world :)"; 
+                     document.getElementById("iron").innerHTML = "This is J.A.R.V.I.S"; 
+                    break;
  
-               case ' hello':
+               case ' hello': 
                case 'hello':
-	       case ' hi':
-	       case 'hi':  
+         case ' hi':
+         case 'hi':  
                      document.getElementById("p1").innerHTML = "Hello There!"; 
 var msg = new SpeechSynthesisUtterance(document.getElementById("p1").innerHTML);
-//window.speechSynthesis.speak(msg);
+//window.speechSynthesis.speak(msg); 
                     break;
 
                case ' stop': 
@@ -240,9 +252,11 @@ var msg = new SpeechSynthesisUtterance(document.getElementById("p1").innerHTML);
 
        
     } 
+ 
+
+    </script> 
 
 
-    </script>
   </head>
   <body> 
 <button onclick="speakIt()">Speak</button> 
